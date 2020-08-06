@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.View;
@@ -39,7 +40,21 @@ public class Practice02ClipPathView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        Path path1 = new Path();
+        path1.addCircle(2*point1.x ,2*point1.y ,point1.x-50, Path.Direction.CW);
+        canvas.save();
+        canvas.clipPath(path1);
         canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
+        canvas.restore();
+
+        Path path2 = new Path();
+        path2.setFillType(Path.FillType.INVERSE_WINDING);
+
+        path2.addCircle(point2.x+bitmap.getWidth()-90,point2.y+bitmap.getHeight()-80 ,bitmap.getWidth()-140, Path.Direction.CW);
+        canvas.save();
+        canvas.clipPath(path2);
         canvas.drawBitmap(bitmap, point2.x, point2.y, paint);
+        canvas.restore();
+
     }
 }

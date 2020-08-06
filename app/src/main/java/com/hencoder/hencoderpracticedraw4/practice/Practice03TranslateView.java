@@ -38,8 +38,14 @@ public class Practice03TranslateView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        canvas.save();
+        canvas.translate(-bitmap.getWidth()/2+50,-bitmap.getHeight()/2+50);
         canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
+        canvas.restore();
+
+        canvas.save();
+        canvas.translate(bitmap.getWidth()-90,0);
         canvas.drawBitmap(bitmap, point2.x, point2.y, paint);
+        canvas.restore();
     }
 }
